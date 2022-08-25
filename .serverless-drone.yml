@@ -1,0 +1,24 @@
+kind: pipeline
+type: exec
+name: default
+
+clone:
+  disable: true
+
+steps:
+  - name: print
+    commands:
+      - pwd
+      # - cd $(pwd)
+      # - pwd
+      # - cd /home/tp/workspace/drone-runner-exec
+      - cd /Users/kpoorman/src/MERN-Stack-Example
+      - ls -al
+      - cd server
+      - yarn
+
+# drone-runner-exec exec 
+# --repo-http=https://github.com/tphoney/bash_plugin 
+# --repo-branch=main 
+# --commit-target=main 
+# --commit-after=7e5f437589cdf071769158ce219b2f443ca13074 /tmp .drone.yml

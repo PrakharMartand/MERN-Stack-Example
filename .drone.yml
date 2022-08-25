@@ -1,0 +1,32 @@
+kind: pipeline
+type: docker
+name: codeAbout Example
+
+platform:
+  os: linux
+  arch: arm64
+
+steps: 
+  - name: debug
+    image: busybox
+    pull: if-not-exists
+    commands:
+    - env
+
+  - name: build server image
+    image: plugins/docker
+    pull: if-not-exists
+    settings:
+      registry: https://index.docker.io/v1/
+      context: server/
+      dockerfile: server/Dockerfile
+      username:
+        from_secret: USERNAME
+      password:
+        from_secret: PASSWORD
+      repo: codefriar/mern-stack-example-server
+      tags: latest
+
+    # commands:
+    # - cd server
+    # - docker buildx build --platform linux/amd64,linux/arm64 .
